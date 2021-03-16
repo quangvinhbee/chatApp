@@ -2,6 +2,7 @@ import React from "react";
 import { View, StyleSheet, Button } from "react-native";
 import { Image, Input, Text } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { Label } from "../share/form/label";
 
 export const Login = () => {
   return (
@@ -40,6 +41,9 @@ export const Login = () => {
         <Text title="Login" style={styles.button}>
           Login
         </Text>
+      </View>
+      <View>
+        <Label text="Cái text"></Label>
       </View>
     </View>
   );

@@ -1,4 +1,5 @@
-import { Text, View } from "react-native";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 
 type LabelProps = {
   [x: string]: any;
@@ -9,8 +10,14 @@ type LabelProps = {
 export function Label({ text, tooltip, ...props }: LabelProps) {
   return (
     <View>
-      <Text>{text}</Text>
-      {tooltip && <View> </View>}
+      <Text style={style.text}>{text}</Text>
     </View>
   );
 }
+
+const style = StyleSheet.create({
+  text: {
+    fontSize: 18,
+    fontWeight: "400",
+  },
+});
