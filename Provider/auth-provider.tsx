@@ -25,21 +25,21 @@ export function AuthProvider(props) {
           phoneNumber: null,
           photoURL: null,
         });
-        navigation.replace("Home");
+        setIsAuthenticated(true);
       })
       .catch((error) => {
-        console.log("That bai", error.message);
+        setIsAuthenticated(false);
       });
   };
   const onLogout = () => {
-    auth.signOut().then(() => console.log("User signed out!"));
+    auth.signOut().then(() => setIsAuthenticated(false));
   };
   const onLogin = (email, password) => {
     console.log(auth.currentUser, "currentUser");
     auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {
-        navigation.replace("Home");
+        setIsAuthenticated(true);
         try {
           AsyncStorage.setItem(
             "currentUser",
@@ -48,16 +48,17 @@ export function AuthProvider(props) {
         } catch (e) {}
       })
       .catch((error) => {
-        console.log("That bai", error.message);
+        setIsAuthenticated(false);
       });
   };
   useEffect(() => {
+    console.log(auth, "auth");
     try {
       const jsonValue = AsyncStorage.getItem("currentUser");
       if (jsonValue) setUser(JSON.parse(JSON.stringify(jsonValue)));
     } catch (e) {}
-    if (auth.currentUser != null || user) navigation.replace("Home");
-  });
+    if (auth.currentUser != null || user) setIsAuthenticated(true);
+  }, [auth]);
   return (
     <AuthContext.Provider value={{ IsAuthenticated, onRegister, onLogin }}>
       {props.children}

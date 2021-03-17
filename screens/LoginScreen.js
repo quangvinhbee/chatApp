@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View, Text, StatusBar } from "react-native";
 import { Login } from "../component/LoginScreen/login";
 import { AuthProvider } from "../Provider/auth-provider";
-import { Button } from "../component/share/form/button";
 
 const LoginScreen = ({ navigation }) => {
   return (
