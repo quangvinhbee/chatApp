@@ -1,17 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { Image, Input, Text, Icon } from "react-native-elements";
 import { Container } from "../share/form/container";
-import { Label } from "../share/form/label";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import tailwind from "tailwind-rn";
 import { Inputs } from "../share/form/input";
 import { Button } from "../share/form/button";
 import { AuthContext } from "../../Provider/auth-provider";
 
-export const Login = ({ navigation }) => {
-  const { isAuthenticated, onLogin } = useContext(AuthContext);
-  const [User, setUser] = useState({ email: "", password: "" });
+export const Register = ({ navigation }) => {
+  const { onRegister } = useContext(AuthContext);
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -27,33 +25,43 @@ export const Login = ({ navigation }) => {
             source={{
               uri: "https://i.imgur.com/vZfG0yY.png",
             }}
-            style={tailwind(" flex-row h-72 p-2 ")}
+            style={tailwind(" flex-row h-20 my-5 ")}
           />
-          <Label text="Welcome to ChatApp! " heading="h1" />
         </View>
         <Container>
           <View style={tailwind(" py-2")}>
             <View style={tailwind(" py-1")}>
               <Inputs
-                placeholder="Email"
+                placeholder="Họ tên"
                 keyboardType="email-address"
                 leftIcon={
                   <Icon name="user" type="font-awesome" color="#D1D5DB" />
                 }
-                onChanged={(e) => {
-                  setUser({ ...User, email: e });
-                }}
               />
             </View>
             <View style={tailwind(" py-1")}>
               <Inputs
-                placeholder="Password"
+                placeholder="Email"
+                keyboardType="email-address"
+                leftIcon={
+                  <Icon name="envelope" type="font-awesome" color="#D1D5DB" />
+                }
+              />
+            </View>
+            <View style={tailwind(" py-1")}>
+              <Inputs
+                placeholder="Mật khẩu"
                 leftIcon={
                   <Icon name="lock" type="font-awesome" color="#D1D5DB" />
                 }
-                onChanged={(e) => {
-                  setUser({ ...User, password: e });
-                }}
+              />
+            </View>
+            <View style={tailwind(" py-1")}>
+              <Inputs
+                placeholder="Nhập lại mật khẩu"
+                leftIcon={
+                  <Icon name="lock" type="font-awesome" color="#D1D5DB" />
+                }
               />
             </View>
           </View>
@@ -61,17 +69,11 @@ export const Login = ({ navigation }) => {
             <Button
               type="primary"
               onPress={() => {
-                onLogin(User.email, User.password);
-              }}
-            >
-              Đăng nhập
-            </Button>
-          </View>
-          <View style={tailwind(" py-1 ")}>
-            <Button
-              type="reset"
-              onPress={() => {
-                navigation.navigate("Register");
+                onRegister(
+                  "lamquangvinh1231@gmail.com",
+                  "A1t2o300",
+                  "lam quang vinh"
+                );
               }}
             >
               Đăng kí

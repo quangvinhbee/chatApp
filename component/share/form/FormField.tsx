@@ -4,13 +4,18 @@ export type FormField = {
   value?: any;
   label?: string;
   id?: string;
-  icon?: any;
+  leftIcon?: any;
   style?: string;
   placeholder?: string;
   onChanged?: (value: any) => void;
   validate?: (value: string) => string;
   required?: boolean;
-  inputType?: string;
+  keyboardType?:
+    | "default"
+    | "number-pad"
+    | "email-address"
+    | "phone-pad"
+    | "visible-password";
   tooltip?: string;
   subfix?: any;
   readOnly?: boolean;
