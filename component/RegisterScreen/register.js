@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Image, Input, Text, Icon } from "react-native-elements";
 import { Container } from "../share/form/container";
@@ -10,6 +10,11 @@ import { AuthContext } from "../../Provider/auth-provider";
 
 export const Register = ({ navigation }) => {
   const { onRegister } = useContext(AuthContext);
+  const [User, setUser] = useState({
+    displayName: "",
+    email: "",
+    password: "",
+  });
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -37,6 +42,9 @@ export const Register = ({ navigation }) => {
                 leftIcon={
                   <Icon name="user" type="font-awesome" color="#D1D5DB" />
                 }
+                onChanged={(e) => {
+                  setUser({ ...User, displayName: e });
+                }}
               />
             </View>
             <View style={tailwind(" py-1")}>
@@ -46,6 +54,9 @@ export const Register = ({ navigation }) => {
                 leftIcon={
                   <Icon name="envelope" type="font-awesome" color="#D1D5DB" />
                 }
+                onChanged={(e) => {
+                  setUser({ ...User, email: e });
+                }}
               />
             </View>
             <View style={tailwind(" py-1")}>
@@ -54,6 +65,9 @@ export const Register = ({ navigation }) => {
                 leftIcon={
                   <Icon name="lock" type="font-awesome" color="#D1D5DB" />
                 }
+                onChanged={(e) => {
+                  setUser({ ...User, password: e });
+                }}
               />
             </View>
             <View style={tailwind(" py-1")}>
@@ -69,11 +83,7 @@ export const Register = ({ navigation }) => {
             <Button
               type="primary"
               onPress={() => {
-                onRegister(
-                  "lamquangvinh1231@gmail.com",
-                  "A1t2o300",
-                  "lam quang vinh"
-                );
+                onRegister(User.email, User.password, User.displayName);
               }}
             >
               Đăng kí
