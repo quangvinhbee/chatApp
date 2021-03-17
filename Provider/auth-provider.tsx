@@ -1,25 +1,25 @@
 import React, { createContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Alert } from "react-native";
 
 export const AuthContext = createContext<{
   [x: string]: any;
   isAuthenticated?: boolean;
   onRegister?: (email: string, password: string, name: string) => any;
   onLogin?: (email: string, password: string) => any;
+  onLogout?: () => any;
 }>({});
 
 export function AuthProvider(props) {
-  const { navigation } = props;
-  console.log("navigation", navigation);
   const [IsAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-  const [initializing, setInitializing] = useState(true);
+  console.log("IsAuthenticatedAuthProvider", IsAuthenticated);
   const [user, setUser] = useState();
   const onRegister = (email, password, name) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        console.log(authUser);
+        Alert.alert("Đăng kí thành công");
         authUser.user.update({
           displayName: name,
           phoneNumber: null,
@@ -32,13 +32,16 @@ export function AuthProvider(props) {
       });
   };
   const onLogout = () => {
-    auth.signOut().then(() => setIsAuthenticated(false));
+    auth.signOut().then(() => {
+      Alert.alert("Đăng xuất thành công");
+      setIsAuthenticated(false);
+    });
   };
   const onLogin = (email, password) => {
-    console.log(auth.currentUser, "currentUser");
     auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {
+        Alert.alert("Đăng Nhập thành công");
         setIsAuthenticated(true);
         try {
           AsyncStorage.setItem(
@@ -48,19 +51,20 @@ export function AuthProvider(props) {
         } catch (e) {}
       })
       .catch((error) => {
-        setIsAuthenticated(false);
+        Alert.alert("Đăng nhập thất bại");
       });
   };
   useEffect(() => {
-    console.log(auth, "auth");
     try {
       const jsonValue = AsyncStorage.getItem("currentUser");
       if (jsonValue) setUser(JSON.parse(JSON.stringify(jsonValue)));
     } catch (e) {}
     if (auth.currentUser != null || user) setIsAuthenticated(true);
-  }, [auth]);
+  }, []);
   return (
-    <AuthContext.Provider value={{ IsAuthenticated, onRegister, onLogin }}>
+    <AuthContext.Provider
+      value={{ isAuth: IsAuthenticated, onRegister, onLogin, onLogout }}
+    >
       {props.children}
     </AuthContext.Provider>
   );

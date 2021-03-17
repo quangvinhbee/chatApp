@@ -6,12 +6,12 @@ import { Register } from "../component/RegisterScreen/register";
 
 const RegisterScreen = ({ navigation }) => {
   return (
-    <AuthProvider navigation={navigation}>
-      <View>
-        {/* <StatusBar animated={true} backgroundColor="#61dafb" hidden={false} /> */}
-        <Register></Register>
-      </View>
-    </AuthProvider>
+    // <AuthProvider>
+    <View>
+      {/* <StatusBar animated={true} backgroundColor="#61dafb" hidden={false} /> */}
+      <Register></Register>
+    </View>
+    // </AuthProvider>
   );
 };
 

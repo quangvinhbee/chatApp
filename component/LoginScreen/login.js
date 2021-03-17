@@ -10,12 +10,11 @@ import { Button } from "../share/form/button";
 import { AuthContext } from "../../Provider/auth-provider";
 
 export const Login = ({ navigation }) => {
-  const { isAuthenticated, onLogin } = useContext(AuthContext);
+  const { isAuth, onLogin } = useContext(AuthContext);
   const [User, setUser] = useState({ email: "", password: "" });
   useEffect(() => {
-    console.log("isAuthenticated", isAuthenticated);
-    if (isAuthenticated) navigation.replace("Home");
-  }, [isAuthenticated]);
+    if (isAuth) navigation.replace("Home");
+  }, [isAuth]);
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}

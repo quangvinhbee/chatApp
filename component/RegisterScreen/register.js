@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Image, Input, Text, Icon } from "react-native-elements";
 import { Container } from "../share/form/container";
@@ -9,15 +9,15 @@ import { Button } from "../share/form/button";
 import { AuthContext } from "../../Provider/auth-provider";
 
 export const Register = ({ navigation }) => {
-  const { onRegister, isAuthenticated } = useContext(AuthContext);
+  const { onRegister, isAuth } = useContext(AuthContext);
   const [User, setUser] = useState({
     displayName: "",
     email: "",
     password: "",
   });
   useEffect(() => {
-    if (isAuthenticated) navigation.replace("Home");
-  }, [isAuthenticated]);
+    if (isAuth) navigation.replace("Home");
+  }, [isAuth]);
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}

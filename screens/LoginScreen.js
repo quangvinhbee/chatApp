@@ -5,12 +5,12 @@ import { AuthProvider } from "../Provider/auth-provider";
 
 const LoginScreen = ({ navigation }) => {
   return (
-    <AuthProvider navigation={navigation}>
-      <View>
-        <StatusBar animated={true} backgroundColor="#61dafb" hidden={false} />
-        <Login navigation={navigation}></Login>
-      </View>
-    </AuthProvider>
+    // <AuthProvider>
+    <View>
+      <StatusBar animated={true} backgroundColor="#61dafb" hidden={false} />
+      <Login navigation={navigation}></Login>
+    </View>
+    // </AuthProvider>
   );
 };
 
