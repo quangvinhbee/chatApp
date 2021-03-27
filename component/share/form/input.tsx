@@ -14,6 +14,7 @@ export function Inputs({
   value,
   tooltip,
   subfix,
+  secureTextEntry,
   onChanged,
   ...props
 }: FormField) {
@@ -28,6 +29,7 @@ export function Inputs({
         style={tailwind(" w-full py-2 pr-5 ")}
         placeholder={placeholder}
         keyboardType={keyboardType}
+        secureTextEntry={secureTextEntry}
         onChangeText={(e) => {
           if (onChanged) onChanged(e);
         }}

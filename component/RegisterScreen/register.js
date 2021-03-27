@@ -17,6 +17,7 @@ export const Register = ({ navigation }) => {
   });
   useEffect(() => {
     if (isAuth) navigation.replace("Home");
+    console.log("Register", isAuth);
   }, [isAuth]);
   return (
     <KeyboardAwareScrollView
@@ -65,6 +66,7 @@ export const Register = ({ navigation }) => {
             <View style={tailwind(" py-1")}>
               <Inputs
                 placeholder="Mật khẩu"
+                secureTextEntry={true}
                 leftIcon={
                   <Icon name="lock" type="font-awesome" color="#D1D5DB" />
                 }
@@ -76,6 +78,7 @@ export const Register = ({ navigation }) => {
             <View style={tailwind(" py-1")}>
               <Inputs
                 placeholder="Nhập lại mật khẩu"
+                secureTextEntry={true}
                 leftIcon={
                   <Icon name="lock" type="font-awesome" color="#D1D5DB" />
                 }

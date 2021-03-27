@@ -51,6 +51,7 @@ export const Login = ({ navigation }) => {
             <View style={tailwind(" py-1")}>
               <Inputs
                 placeholder="Password"
+                secureTextEntry={true}
                 leftIcon={
                   <Icon name="lock" type="font-awesome" color="#D1D5DB" />
                 }

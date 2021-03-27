@@ -12,7 +12,7 @@ export const AuthContext = createContext<{
 }>({});
 
 export function AuthProvider(props) {
-  const [IsAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [IsAuthenticated, setIsAuthenticated] = useState<boolean>();
   console.log("IsAuthenticatedAuthProvider", IsAuthenticated);
   const [user, setUser] = useState();
   const onRegister = (email, password, name) => {
@@ -20,15 +20,16 @@ export function AuthProvider(props) {
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
         Alert.alert("Đăng kí thành công");
+        setIsAuthenticated(true);
+        setUser(authUser.currentUser);
         authUser.user.update({
           displayName: name,
           phoneNumber: null,
           photoURL: null,
         });
-        setIsAuthenticated(true);
       })
       .catch((error) => {
-        setIsAuthenticated(false);
+        Alert.alert("Đăng kí thất bại");
       });
   };
   const onLogout = () => {
@@ -43,6 +44,7 @@ export function AuthProvider(props) {
       .then((authUser) => {
         Alert.alert("Đăng Nhập thành công");
         setIsAuthenticated(true);
+        setUser(authUser.currentUser);
         try {
           AsyncStorage.setItem(
             "currentUser",
@@ -59,7 +61,7 @@ export function AuthProvider(props) {
       const jsonValue = AsyncStorage.getItem("currentUser");
       if (jsonValue) setUser(JSON.parse(JSON.stringify(jsonValue)));
     } catch (e) {}
-    if (auth.currentUser != null || user) setIsAuthenticated(true);
+    if (auth.currentUser != null) setIsAuthenticated(true);
   }, []);
   return (
     <AuthContext.Provider

@@ -8,6 +8,7 @@ import tailwind from "tailwind-rn";
 import { Inputs } from "../share/form/input";
 import { Button } from "../share/form/button";
 import { AuthContext } from "../../Provider/auth-provider";
+import { HeaderMain } from "./component/header";
 
 export const Home = ({ navigation }) => {
   const { isAuth, onLogout } = useContext(AuthContext);
@@ -15,6 +16,10 @@ export const Home = ({ navigation }) => {
   useEffect(() => {
     if (!isAuth) navigation.replace("Login");
   }, [isAuth]);
+  if (isAuth == undefined) return null;
+  if (!isAuth) {
+    navigation.replace("Login");
+  }
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -22,10 +27,9 @@ export const Home = ({ navigation }) => {
       scrollEnabled={false}
     >
       <View>
-        <Text>Home Screen</Text>
+        <HeaderMain></HeaderMain>
         <Button
           onPress={() => {
-            console.log("Click logout");
             onLogout();
           }}
         >

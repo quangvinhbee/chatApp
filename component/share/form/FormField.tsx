@@ -4,6 +4,7 @@ export type FormField = {
   value?: any;
   label?: string;
   id?: string;
+  secureTextEntry?:boolean;
   leftIcon?: any;
   style?: string;
   placeholder?: string;

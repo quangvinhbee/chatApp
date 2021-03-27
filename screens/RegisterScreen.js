@@ -9,7 +9,7 @@ const RegisterScreen = ({ navigation }) => {
     // <AuthProvider>
     <View>
       {/* <StatusBar animated={true} backgroundColor="#61dafb" hidden={false} /> */}
-      <Register></Register>
+      <Register navigation={navigation}></Register>
     </View>
     // </AuthProvider>
   );
