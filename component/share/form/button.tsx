@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import tailwind from "tailwind-rn";
 type ButtonProps = {
   [x: string]: any;
   onPress?: () => void;
   text: string;
+  isLoading?: boolean;
   type?: "primary" | "reset";
 };
 export function Button({
   text,
   onPress,
   type = "primary",
+  isLoading,
   ...props
 }: ButtonProps) {
   const [stylebg, setstylebg] = useState("");
@@ -24,18 +32,24 @@ export function Button({
       setstyletext(" text-blue-400 ");
     }
   }, [type]);
+
   return (
-    <View style={tailwind("  rounded-full " + stylebg)}>
+    <TouchableOpacity
+      style={tailwind(
+        "  rounded-full flex-row justify-center items-center" + stylebg
+      )}
+      onPress={() => {
+        if (onPress) onPress();
+      }}
+    >
+      {isLoading && <ActivityIndicator size="small" color="#FFFFFF" />}
       <Text
         style={tailwind(
           "px-4 py-3 text-center font-bold text-center " + styletext
         )}
-        onPress={() => {
-          if (onPress) onPress();
-        }}
       >
         {props.children}
       </Text>
-    </View>
+    </TouchableOpacity>
   );
 }

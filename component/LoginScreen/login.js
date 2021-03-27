@@ -12,9 +12,11 @@ import { AuthContext } from "../../Provider/auth-provider";
 export const Login = ({ navigation }) => {
   const { isAuth, onLogin } = useContext(AuthContext);
   const [User, setUser] = useState({ email: "", password: "" });
+  const [loading, setloading] = useState(false);
   useEffect(() => {
     if (isAuth) navigation.replace("Home");
   }, [isAuth]);
+
   return (
     <KeyboardAwareScrollView
       resetScrollToCoords={{ x: 0, y: 0 }}
@@ -64,8 +66,12 @@ export const Login = ({ navigation }) => {
           <View style={tailwind(" py-1 ")}>
             <Button
               type="primary"
+              isLoading={loading}
               onPress={() => {
-                onLogin(User.email, User.password);
+                setloading(true);
+                onLogin(User.email, User.password).then((res) => {
+                  setloading(false);
+                });
               }}
             >
               Đăng nhập

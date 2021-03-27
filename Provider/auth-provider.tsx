@@ -6,8 +6,8 @@ import { Alert } from "react-native";
 export const AuthContext = createContext<{
   [x: string]: any;
   isAuthenticated?: boolean;
-  onRegister?: (email: string, password: string, name: string) => any;
-  onLogin?: (email: string, password: string) => any;
+  onRegister?: (email: string, password: string, name: string) => Promise<any>;
+  onLogin?: (email: string, password: string) => Promise<any>;
   onLogout?: () => any;
 }>({});
 
@@ -15,8 +15,8 @@ export function AuthProvider(props) {
   const [IsAuthenticated, setIsAuthenticated] = useState<boolean>();
   console.log("IsAuthenticatedAuthProvider", IsAuthenticated);
   const [user, setUser] = useState();
-  const onRegister = (email, password, name) => {
-    auth
+  const onRegister = async (email, password, name) => {
+    await auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
         Alert.alert("Đăng kí thành công");
@@ -32,14 +32,16 @@ export function AuthProvider(props) {
         Alert.alert("Đăng kí thất bại");
       });
   };
-  const onLogout = () => {
-    auth.signOut().then(() => {
+  const onLogout = async () => {
+    console.log("onLogout");
+    await auth.signOut().then(() => {
       Alert.alert("Đăng xuất thành công");
       setIsAuthenticated(false);
     });
   };
-  const onLogin = (email, password) => {
-    auth
+  const onLogin = async (email, password) => {
+    console.log("onLogin");
+    await auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {
         Alert.alert("Đăng Nhập thành công");
