@@ -10,7 +10,7 @@ import tailwind from "tailwind-rn";
 type ButtonProps = {
   [x: string]: any;
   onPress?: () => void;
-  text: string;
+  text?: string;
   isLoading?: boolean;
   type?: "primary" | "reset";
 };

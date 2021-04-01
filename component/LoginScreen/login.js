@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from "react";
-import { View, StyleSheet } from "react-native";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { View, StyleSheet, Animated } from "react-native";
 import { Image, Input, Text, Icon } from "react-native-elements";
 import { Container } from "../share/form/container";
 import { Label } from "../share/form/label";
@@ -23,7 +23,7 @@ export const Login = ({ navigation }) => {
       contentContainerStyle={tailwind("")}
       scrollEnabled={false}
     >
-      <View>
+      <View style={tailwind("")}>
         <View
           style={tailwind("flex-col justify-center bg-white rounded-b-3xl ")}
         >

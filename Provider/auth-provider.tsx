@@ -63,7 +63,7 @@ export function AuthProvider(props) {
       const jsonValue = AsyncStorage.getItem("currentUser");
       if (jsonValue) setUser(JSON.parse(JSON.stringify(jsonValue)));
     } catch (e) {}
-    if (auth.currentUser != null) setIsAuthenticated(true);
+    if (auth.currentUser != null || user) setIsAuthenticated(true);
   }, []);
   return (
     <AuthContext.Provider
