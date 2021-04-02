@@ -1,8 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
-import { ScrollView, View } from "react-native";
+import { ScrollView, View, TouchableOpacity } from "react-native";
+import tailwind from "tailwind-rn";
 import { MessageUser } from "./message-user";
+import { Icon } from "react-native-elements";
+import { Inputs } from "../../share/form/input";
 
-export function ListMessageUser({ scrollToTop, scrollToBottom, ...props }) {
+export function ListMessageUser({
+  scrollToTop,
+  scrollToBottom,
+  navigation,
+  ...props
+}) {
   return (
     <View style={{ flex: 1 }}>
       <ScrollView
@@ -10,16 +18,28 @@ export function ListMessageUser({ scrollToTop, scrollToBottom, ...props }) {
           console.log(e);
         }}
       >
+        <View style={tailwind(" pt-3  px-2 bg-white")}>
+          <Inputs
+            placeholder="Search"
+            keyboardType="email-address"
+            leftIcon={<Icon name="search" type="ionicon" color="#D1D5DB" />}
+            onChanged={(e) => {}}
+          />
+        </View>
         {ListMessageUserData.map((item, index) => {
           return (
             <View key={index}>
-              <MessageUser
-                avatar={item.avatar}
-                displayName={item.displayName}
-                lastMessage={item.lastMessage}
-                timeLastMessage={item.timeLastMessage}
-                status={item.status}
-              />
+              <TouchableOpacity
+                onPress={() => navigation.navigate("ChatScreen", { ...item })}
+              >
+                <MessageUser
+                  avatar={item.avatar}
+                  displayName={item.displayName}
+                  lastMessage={item.lastMessage}
+                  timeLastMessage={item.timeLastMessage}
+                  status={item.status}
+                />
+              </TouchableOpacity>
             </View>
           );
         })}

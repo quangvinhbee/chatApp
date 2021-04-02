@@ -1,12 +1,15 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
-import { Alert, Button, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, Image, StyleSheet, Text, View } from "react-native";
 import { NavigationContainer, StackActions } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./LoginScreen";
 import RegisterScreen from "./RegisterScreen";
 import HomeScreen from "./HomeScreen";
-import { AuthProvider } from "../Provider/auth-provider";
+import ChatScreen from "./ChatScreen";
+import { HeaderTitle } from "../component/share/form/headerTitle/header-title";
+import { Color } from "./../constant/color";
+import { Icon } from "react-native-elements/dist/icons/Icon";
 
 export default function StackAllScreen({ navigation }) {
   const Stack = createStackNavigator();
@@ -18,8 +21,34 @@ export default function StackAllScreen({ navigation }) {
     <NavigationContainer>
       <Stack.Navigator screenOptions={gloalScreenOptions}>
         <Stack.Screen
+          name="Home"
+          options={{
+            title: "Your Mail",
+            headerShown: false,
+            gestureEnabled: true,
+            gestureDirection: "vertical",
+          }}
+          component={HomeScreen}
+        ></Stack.Screen>
+        <Stack.Screen
+          name="ChatScreen"
+          options={({ route }) => ({
+            headerStatusBarHeight: 6,
+            headerStyle: {
+              backgroundColor: "#FFFFFF",
+            },
+            headerTitle: <HeaderTitle dataUser={route.params} />,
+          })}
+          component={ChatScreen}
+        ></Stack.Screen>
+        <Stack.Screen
           name="Login"
-          options={{ title: "Your Mail", headerShown: false }}
+          options={{
+            title: "Your Mail",
+            headerShown: false,
+            gestureEnabled: true,
+            gestureDirection: "vertical",
+          }}
           component={LoginScreen}
         ></Stack.Screen>
         <Stack.Screen
@@ -30,13 +59,10 @@ export default function StackAllScreen({ navigation }) {
               backgroundColor: "#FFFFFF",
             },
             headerTintColor: "#000",
+            gestureEnabled: true,
+            gestureDirection: "vertical",
           }}
           component={RegisterScreen}
-        ></Stack.Screen>
-        <Stack.Screen
-          name="Home"
-          options={{ title: "Your Mail", headerShown: false }}
-          component={HomeScreen}
         ></Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>

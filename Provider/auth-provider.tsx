@@ -40,7 +40,6 @@ export function AuthProvider(props) {
     });
   };
   const onLogin = async (email, password) => {
-    console.log("onLogin");
     await auth
       .signInWithEmailAndPassword(email, password)
       .then((authUser) => {

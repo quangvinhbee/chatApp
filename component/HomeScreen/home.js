@@ -20,7 +20,7 @@ export const Home = ({ navigation }) => {
   return (
     <View style={tailwind(" h-full ")}>
       <HeaderMain></HeaderMain>
-      <ListMessageUser></ListMessageUser>
+      <ListMessageUser navigation={navigation}></ListMessageUser>
       <Button
         onPress={() => {
           onLogout();

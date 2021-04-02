@@ -4,6 +4,7 @@ import { Text } from "react-native-elements";
 import tailwind from "tailwind-rn";
 import { format } from "date-fns";
 import { Icon } from "react-native-elements";
+import { Color } from "../../../constant/color";
 
 export function MessageUser({
   avatar,
@@ -44,7 +45,11 @@ export function MessageUser({
       </View>
       <View>
         <View>
-          <Icon name="checkmark-outline" type="ionicon" color="#29E6A6" />
+          <Icon
+            name="checkmark-outline"
+            type="ionicon"
+            color={Color.Secondary}
+          />
         </View>
         <Text style={tailwind(" text-sm text-gray-300 ")}>
           {format(new Date(), "HH:MM")}
